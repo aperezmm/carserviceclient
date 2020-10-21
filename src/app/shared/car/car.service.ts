@@ -9,9 +9,14 @@ export class CarService {
 
   constructor(private http: HttpClient) {
   }
-
+  cars: Array<any>
+  /*
   getAll(): Observable<any> {
     return this.http.get(this.API + '/cool-cars');
+  */
+
+  getAllCars(): Observable<any> {
+    return this.http.get(this.CAR_API);
   }
 
   get(id: string) {
@@ -30,5 +35,21 @@ export class CarService {
 
   remove(href: string) {
     return this.http.delete(href);
+  }
+
+  removeOwner(dni: string){
+    this.getAllCars().subscribe(data => {
+      this.cars = data._embedded.cars;
+      for(const car of this.cars){
+        if(car.ownerDni == dni){
+          car.ownerDni == null;
+          car.href = car._links.car.href;
+          this.save(car).subscribe(result => {
+            console.log('Eliminado?:');
+            console.log(car);
+          },error => console.error(error));
+        }
+      }
+    });
   }
 }

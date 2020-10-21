@@ -34,4 +34,8 @@ export class OwnerService {
   remove(href: string){
     return this.http.delete(href);
   }
+
+  getHref(href: string){
+    return this.http.get(href);
+  }
 }

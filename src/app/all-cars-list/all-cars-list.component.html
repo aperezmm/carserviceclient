@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-title>All Cars and Owners</mat-card-title>
+    <mat-card-content>
+        <mat-list>
+            <mat-list-item *ngFor="let car of cars">
+                <img mat-list-avatar src="{{car.giphyUrl}}" alt="{{car.name}}">
+                <h3 mat-line>
+                    <a mat-button *ngIf="car.ownerDni"><strong>Car: </strong>{{car.name}} 
+                        <strong>Car owner: </strong>{{car.ownerDni}}</a>
+                </h3>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>
+    <button mat-raised-button color="primary" [routerLink]="['/car-add']">Add</button>
+    <button mat-raised-button color="warn" [routerLink]="['/car-list']">Regresar</button>
+</mat-card>

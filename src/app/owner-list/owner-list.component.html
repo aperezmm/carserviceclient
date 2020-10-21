@@ -1,0 +1,19 @@
+<mat-card>
+    <mat-card-title>Owner List</mat-card-title>
+    <mat-card-content>
+        <mat-selection-list #list [(ngModel)]="selectedOptions">
+            <ng-container *ngFor="let owner of owners">
+                <mat-list-option [value]="owner._links.self.href" [selected]='owner.selected'>
+                    <img mat-list-avatar src="{{owner.giphyUrl}}" alt="{{owner.dni}}">
+                    <h3 mat-line>
+                        <a mat-button [routerLink]="['/owner-edit', owner._links.self.href.toString().substring((owner._links.self.href.lastIndexOf('/'))+1)]">
+                            <strong>Owner DNI: </strong>{{owner.dni}}</a>
+                    </h3>
+                </mat-list-option>
+            </ng-container>
+        </mat-selection-list>
+    </mat-card-content>
+    <button mat-raised-button color="primary" [routerLink]="['/owner-create']">Add</button>
+    <button mat-raised-button color="warn" (click)=remove() type="button">Delete</button>
+    <button mat-raised-button color="secundary" [routerLink]="['/car-list']">Regresar</button>
+</mat-card>
